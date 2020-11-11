@@ -1,12 +1,27 @@
 import example.*
+import animales.*
+import conspiraciones.*
 
 describe "Tests de Casas"{
 	const ana = new Personaje (casa = lannister,conyuges =[],patrimonio = 0,estaVivo = true,personalidad = asesino)
 	const rob = new Personaje(casa = stark,conyuges = [],patrimonio = 0,estaVivo = true,personalidad = asesino)
+	const sansa = new Personaje(casa =stark,conyuges =[],patrimonio = 0,estaVivo = true,personalidad = asesinoPrecavido)
+	const arya = new Personaje(casa =stark,conyuges =[],patrimonio = 0,estaVivo = true,personalidad = asesinoPrecavido)
 	
 	test "Una casa permite que un personaje de esta casa se case con otro"{ 
 		rob.casarse(ana)
 		assert.equals([ana],rob.conyuges())
-		}
+	}
+	
+	test "Una casa no permite que un personajse se case con otro"{
+		arya.casarse(sansa)
+		assert.throwsExceptionWithMessage("No se permite casamiento entre familia", {arya.cantidadConyuges()} )
+	}
+		
+	test "Los lannister son ricos"{
+		lannister.agregarPatrimonio(200000)
+		assert.equals(true,lannister.esRica())
+	}
+	
 		
 }

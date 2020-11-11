@@ -1,3 +1,7 @@
+import animales.*
+import conspiraciones.*
+
+
 class Personaje{
 	var casa 
 	var conyuges = []
@@ -71,8 +75,7 @@ class Personaje{
 }
 
 class Casa{
-	var nombre 
-	var patrimonio
+	var patrimonio = 0
 	var ciudad
 	var miembros = []
 	
@@ -80,10 +83,13 @@ class Casa{
 		return true
 	}
 	method esFamiliar(personaje){
-		return personaje.casa() == nombre
+		return personaje.casa() == self
 	}
 	method patrimonio(){
 		return patrimonio
+	}
+	method agregarPatrimonio(valor){
+		patrimonio += valor
 	}
 	method cantMiembros(){
 		return miembros.size()
@@ -131,109 +137,10 @@ object guardiaDeLaNoche inherits Casa{
      }
 }
 
-//////////////////////// Acompañantes
-
-class Animal{
-	const patrimonio = 0
-	method patrimonio(){
-		return patrimonio
-	}
-	method esPeligroso(){
-		return true
-	}
-}
-
-class Lobo inherits Animal{
-	var esHuargo 
-	
-	override method esPeligroso(){
-		return esHuargo
-	}
-}
-
-class Dragon inherits Animal{
-	
-}
 
 
 
 /////////////// Conspiraciones
-
-class Conspiracion{
-	var objetivo
-	var complotados = []
-	
-	var casas = []
-	
-	method laMasPobre(){
-		return casas.min({casa => casa.patrimonio()})
-	}
-	
-	method traidores(){
-		var traidores complotados.filter({complotado => objetivo.esAliado(complotado)})
-		return traidores.size()
-	}
-	
-	method ejecutar(){
-		complotados.forEach({complotado => complotado.ejecutarComplot(objetivo,self)})
-	}
-	method objetivoCumplido(){
-		return not(objetivo.esPeligroso())
-	}
-	
-}
-
-
-class Personalidad {
-	method actuar(objetivo,conspiracion){
-		
-	}
-}
-
-object sutil inherits Personalidad{
-	override method actuar(objetivo,conspiracion){
-		var laMasPobre = conspiracion.laMasPobre()
-		var losVivosYSolteros = laMasPobre.vivosYSolteros()
-		var personajePobre = losVivosYSolteros.first()	
-		if(laMasPobre.permiteCasamiento(personajePobre,objetivo)){
-		  objetivo.casarse(personajePobre)
-		}
-		else{
-			self.error("No se puede llevar a cabo la boda")
-		}
-	}
-}
-
-object asesino inherits Personalidad{
-	override method actuar(objetivo,conspiracion){
-		objetivo.serAsesinado()
-	}
-}
-
-object asesinoPrecavido inherits Personalidad{
-	override method actuar(objetivo,conspiracion){
-		if(objetivo.estaSolo()){
-			objetivo.serAsesinado()
-		}
-	}
-}
-
-object disipado inherits Personalidad{
-	var porcentaje 
-	method cambiarPorcentaje(porcentajeNuevo){
-		porcentaje = porcentajeNuevo
-	}
-	override method actuar(objetivo,conspiracion){
-		objetivo.derrocharFortuna(porcentaje)
-	}
-}
-
-
-object miedoso inherits Personalidad{
-	override method actuar(objetivo,conspiracion){
-		
-	}
-}
 
 
 
