@@ -140,7 +140,7 @@ object guardiaDeLaNoche inherits Casa{
 
 
 
-/////////////// Conspiraciones
+//
 
 
 

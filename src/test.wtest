@@ -15,7 +15,7 @@ describe "Tests de Casas"{
 	
 	test "Una casa no permite que un personajse se case con otro"{
 		arya.casarse(sansa)
-		assert.throwsExceptionWithMessage("No se permite casamiento entre familia", {arya.cantidadConyuges()} )
+		assert.throwsExceptionWithMessage("No se permite casamiento entre familia", {arya.cantidadConyuges()})
 	}
 		
 	test "Los lannister son ricos"{
